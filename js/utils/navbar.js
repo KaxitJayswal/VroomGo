@@ -4,11 +4,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toggle hamburger menu
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const authButtons = document.querySelector('.auth-buttons');
     
     if (hamburger) {
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
+            // Also toggle auth buttons if they exist
+            if (authButtons && window.getComputedStyle(authButtons).display !== 'none') {
+                authButtons.classList.toggle('active');
+            }
         });
     }
     

@@ -722,6 +722,21 @@
 }
 
 /* Responsive Adjustments */
+@media (max-width: 992px) {
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .vehicle-grid, .user-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .report-charts {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     .admin-dashboard {
         flex-direction: column;
@@ -732,17 +747,38 @@
         padding: 15px 0;
     }
     
+    .admin-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .admin-menu li {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px;
+    }
+    
     .admin-menu-item {
-        padding: 12px 20px;
+        padding: 12px 15px;
+        text-align: center;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+    
+    .admin-menu-item.active {
+        border-left-color: transparent;
+        border-bottom-color: #3498db;
+    }
+    
+    .admin-menu-item::before {
+        position: static;
+        margin-right: 8px;
+        transform: none;
     }
     
     .form-row {
         flex-direction: column;
         gap: 0;
-    }
-    
-    .report-charts {
-        grid-template-columns: 1fr;
     }
     
     .admin-content {
@@ -751,11 +787,80 @@
     
     .search-filter {
         flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .admin-header-actions {
+        width: 100%;
+        justify-content: space-between;
     }
     
     .modal-content {
         width: 95%;
         padding: 20px;
         margin: 20px auto;
+    }
+    
+    .booking-details {
+        flex-direction: column;
+    }
+    
+    .booking-vehicle {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .vehicle-grid, .user-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-menu li {
+        width: 100%;
+        margin: 0 0 8px;
+    }
+    
+    .vehicle-card {
+        flex-direction: column;
+    }
+    
+    .vehicle-image {
+        width: 100%;
+        height: 180px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    
+    .modal-content {
+        padding: 15px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2rem;
     }
 }

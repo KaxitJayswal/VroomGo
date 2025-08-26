@@ -133,3 +133,77 @@
     font-size: 0.85rem;
     margin-left: auto;
 }
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .profile-container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-avatar {
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+    }
+    
+    .profile-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+    }
+    
+    .profile-tab {
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        border-radius: 6px;
+    }
+    
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+    
+    .profile-title h1 {
+        font-size: 1.5rem;
+    }
+    
+    .profile-title p {
+        font-size: 1rem;
+    }
+    
+    .profile-tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .activity-item {
+        flex-direction: column;
+    }
+    
+    .activity-icon {
+        margin-bottom: 0.5rem;
+    }
+    
+    .activity-date {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+}

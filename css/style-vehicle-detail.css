@@ -338,18 +338,47 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 992px) {
+    .vehicle-images {
+        height: 400px;
+    }
+    
+    .vehicle-price-tag {
+        font-size: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
+    .vehicle-detail-container {
+        padding: 20px 15px;
+    }
+
     .vehicle-detail-header {
         flex-direction: column;
+        gap: 15px;
+    }
+    
+    .vehicle-images {
+        height: 300px;
+    }
+    
+    .thumbnail-container {
+        gap: 10px;
+    }
+    
+    .thumbnail {
+        height: 60px;
     }
     
     .vehicle-detail-tabs {
         overflow-x: auto;
         white-space: nowrap;
+        padding-bottom: 5px;
     }
     
     .tab-btn {
         padding: 10px 15px;
+        font-size: 0.9rem;
     }
     
     .specs-grid, .features-list {
@@ -359,5 +388,81 @@
     .modal-content {
         width: 95%;
         margin: 5% auto;
+        padding: 20px;
+    }
+    
+    .vehicle-info-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .availability-calendar {
+        padding: 15px;
+    }
+    
+    .calendar-grid {
+        grid-template-columns: repeat(7, 40px);
+    }
+    
+    .calendar-day {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .vehicle-images {
+        height: 250px;
+    }
+    
+    .thumbnail-container {
+        gap: 8px;
+    }
+    
+    .thumbnail {
+        height: 50px;
+    }
+    
+    .vehicle-detail-title {
+        font-size: 1.5rem;
+    }
+    
+    .vehicle-price-tag {
+        font-size: 1.3rem;
+    }
+    
+    .detail-section-title {
+        font-size: 1.2rem;
+    }
+    
+    .detail-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-content {
+        padding: 15px;
+    }
+    
+    .review-item {
+        padding: 15px;
+    }
+    
+    .booking-form {
+        padding: 15px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .calendar-grid {
+        grid-template-columns: repeat(7, 35px);
+    }
+    
+    .calendar-day {
+        height: 35px;
+        font-size: 0.8rem;
     }
 }

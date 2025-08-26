@@ -667,6 +667,21 @@ footer {
 }
 
 /* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 1024px) {
+    .container {
+        width: 95%;
+        padding: 0 15px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem;
@@ -682,18 +697,51 @@ footer {
         background-color: white;
         padding: 1rem;
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 100;
     }
 
     .nav-links.show, .auth-buttons.show {
         display: flex;
+    }
+    
+    .nav-links a {
+        width: 100%;
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
     }
 
     .hamburger {
         display: flex;
     }
 
+    .hero-section {
+        height: auto;
+        padding: 60px 0;
+    }
+    
+    .hero-content {
+        text-align: center;
+        padding: 0 20px;
+    }
+    
+    .hero-search {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .hero-search input, 
+    .hero-search select {
+        width: 100%;
+    }
+
     .vehicle-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    
+    .vehicle-card {
+        height: auto;
     }
 
     .booking-item {
@@ -704,11 +752,45 @@ footer {
     .booking-status {
         margin-top: 1rem;
     }
+    
+    .why-choose-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
+    body {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-padding {
+        padding: 2rem 0;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+
     .stats-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-item {
+        padding: 15px;
     }
 
     .vehicle-grid {
@@ -717,5 +799,24 @@ footer {
 
     .filter-buttons {
         flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .tab-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
     }
 }
