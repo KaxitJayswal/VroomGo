@@ -42,10 +42,6 @@ A modern web application for vehicle rentals including cars, bikes, and SUVs.
 - `/pages` - Additional HTML pages
 - `/images` - Image assets
 
-## License
-
-[Add your license information here]
-
 ## Acknowledgments
 
 - Icons by [Font Awesome](https://fontawesome.com)
