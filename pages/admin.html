@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VroomGo - Admin Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/style-admin.css">
+    <link rel="stylesheet" href="../css/admin-new.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
     <nav class="navbar">
@@ -59,19 +60,22 @@
         <!-- Admin login section (shown when not logged in) -->
         <div id="admin-login-container" class="admin-login-container">
             <div class="admin-login-box">
-                <h2>Admin Login</h2>
+                <h2><i class="fas fa-lock"></i> Admin Login</h2>
                 <form id="admin-login-form">
                     <div class="form-group">
-                        <label for="admin-email">Email</label>
-                        <input type="email" id="admin-login-email" autocomplete="email" required>
+                        <label for="admin-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="admin-login-email" autocomplete="email" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
-                        <label for="admin-password">Password</label>
-                        <input type="password" id="admin-login-password" autocomplete="current-password" required>
+                        <label for="admin-password"><i class="fas fa-key"></i> Password</label>
+                        <input type="password" id="admin-login-password" autocomplete="current-password" placeholder="Enter your password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
                 </form>
-                <div id="admin-login-error" class="error-message hidden"></div>
+                <div id="admin-login-error" class="error-message hidden">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="error-text">Invalid credentials. Please try again.</span>
+                </div>
             </div>
         </div>
 
@@ -91,7 +95,7 @@
                 <section id="vehicles-section" class="admin-section active">
                     <div class="section-header">
                         <h2>Manage Vehicles</h2>
-                        <button id="add-vehicle-btn" class="btn btn-primary">Add New Vehicle</button>
+                        <button id="add-vehicle-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Vehicle</button>
                     </div>
                     
                     <div class="search-filter">
@@ -143,6 +147,8 @@
                             <option value="completed">Completed</option>
                             <option value="cancelled">Cancelled</option>
                         </select>
+                        <input type="date" placeholder="From Date" class="date-filter">
+                        <input type="date" placeholder="To Date" class="date-filter">
                     </div>
                     
                     <div class="table-container">
@@ -175,11 +181,16 @@
                     </div>
                     
                     <div class="search-filter">
-                        <input type="text" id="user-search" placeholder="Search users...">
+                        <input type="text" id="user-search" placeholder="Search users by name or email...">
                         <select id="user-role-filter">
                             <option value="all">All Roles</option>
                             <option value="user">Regular Users</option>
                             <option value="admin">Admins</option>
+                        </select>
+                        <select id="user-status-filter">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select>
                     </div>
                     
@@ -209,6 +220,7 @@
                 <section id="reports-section" class="admin-section">
                     <div class="section-header">
                         <h2>Reports</h2>
+                        <button class="btn btn-primary"><i class="fas fa-download"></i> Export Data</button>
                     </div>
                     
                     <div class="report-cards">
@@ -246,6 +258,23 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="report-charts">
+                        <div class="report-chart">
+                            <h3>Revenue Trends</h3>
+                            <div id="revenue-chart" class="chart-container">
+                                <!-- Chart will be rendered here -->
+                                <p class="placeholder-text">Loading revenue data...</p>
+                            </div>
+                        </div>
+                        <div class="report-chart">
+                            <h3>User Growth</h3>
+                            <div id="users-chart" class="chart-container">
+                                <!-- Chart will be rendered here -->
+                                <p class="placeholder-text">Loading user growth data...</p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
@@ -255,17 +284,17 @@
     <div class="modal" id="vehicle-modal">
         <div class="modal-content large-modal">
             <span class="close-modal" id="close-vehicle-modal">&times;</span>
-            <h2 id="vehicle-modal-title">Add New Vehicle</h2>
+            <h2 id="vehicle-modal-title"><i class="fas fa-car"></i> <span>Add New Vehicle</span></h2>
             <form id="vehicle-form">
                 <input type="hidden" id="edit-vehicle-id">
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="vehicle-name">Vehicle Name</label>
-                        <input type="text" id="vehicle-name" required>
+                        <label for="vehicle-name"><i class="fas fa-tag"></i> Vehicle Name</label>
+                        <input type="text" id="vehicle-name" placeholder="e.g., Toyota Camry 2023" required>
                     </div>
                     <div class="form-group">
-                        <label for="vehicle-type">Type</label>
+                        <label for="vehicle-type"><i class="fas fa-car-side"></i> Type</label>
                         <select id="vehicle-type" required>
                             <option value="sedan">Sedan</option>
                             <option value="suv">SUV</option>
@@ -278,25 +307,25 @@
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="vehicle-price">Price Per Day ($)</label>
-                        <input type="number" id="vehicle-price" min="0" step="0.01" required>
+                        <label for="vehicle-price"><i class="fas fa-dollar-sign"></i> Price Per Day ($)</label>
+                        <input type="number" id="vehicle-price" min="0" step="0.01" placeholder="e.g., 59.99" required>
                     </div>
                     <div class="form-group">
-                        <label for="vehicle-seats">Seats</label>
-                        <input type="number" id="vehicle-seats" min="1" max="20" required>
+                        <label for="vehicle-seats"><i class="fas fa-users"></i> Seats</label>
+                        <input type="number" id="vehicle-seats" min="1" max="20" placeholder="e.g., 5" required>
                     </div>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="vehicle-transmission">Transmission</label>
+                        <label for="vehicle-transmission"><i class="fas fa-cogs"></i> Transmission</label>
                         <select id="vehicle-transmission" required>
                             <option value="automatic">Automatic</option>
                             <option value="manual">Manual</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="vehicle-fuel">Fuel Type</label>
+                        <label for="vehicle-fuel"><i class="fas fa-gas-pump"></i> Fuel Type</label>
                         <select id="vehicle-fuel" required>
                             <option value="gasoline">Gasoline</option>
                             <option value="diesel">Diesel</option>
@@ -308,35 +337,35 @@
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="vehicle-luggage">Luggage Capacity</label>
-                        <input type="number" id="vehicle-luggage" min="0">
+                        <label for="vehicle-luggage"><i class="fas fa-suitcase"></i> Luggage Capacity</label>
+                        <input type="number" id="vehicle-luggage" min="0" placeholder="e.g., 3">
                     </div>
                     <div class="form-group">
-                        <label for="vehicle-mileage">Mileage Limit</label>
+                        <label for="vehicle-mileage"><i class="fas fa-road"></i> Mileage Limit</label>
                         <input type="text" id="vehicle-mileage" placeholder="e.g., Unlimited or 200 miles/day">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="vehicle-image">Image URL</label>
-                    <input type="text" id="vehicle-image" required>
+                    <label for="vehicle-image"><i class="fas fa-image"></i> Image URL</label>
+                    <input type="text" id="vehicle-image" placeholder="https://example.com/car-image.jpg" required>
                     <div class="image-preview-container">
                         <img id="image-preview" src="" alt="Vehicle Preview" crossorigin="anonymous">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="vehicle-description">Description</label>
-                    <textarea id="vehicle-description" rows="4" required></textarea>
+                    <label for="vehicle-description"><i class="fas fa-align-left"></i> Description</label>
+                    <textarea id="vehicle-description" rows="4" placeholder="Provide a detailed description of the vehicle..." required></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label>Features (comma separated)</label>
+                    <label><i class="fas fa-list-ul"></i> Features (comma separated)</label>
                     <input type="text" id="vehicle-features" placeholder="e.g., GPS, Bluetooth, Backup Camera">
                 </div>
                 
                 <div class="form-group">
-                    <label>Status</label>
+                    <label><i class="fas fa-check-circle"></i> Status</label>
                     <div class="radio-group">
                         <label>
                             <input type="radio" name="vehicle-status" value="available" checked> Available
@@ -351,8 +380,8 @@
                 </div>
                 
                 <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancel-vehicle-btn">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Vehicle</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-vehicle-btn"><i class="fas fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Vehicle</button>
                 </div>
             </form>
         </div>
@@ -362,14 +391,17 @@
     <div class="modal" id="booking-details-modal">
         <div class="modal-content">
             <span class="close-modal" id="close-booking-details">&times;</span>
-            <h2>Booking Details</h2>
+            <h2><i class="fas fa-calendar-check"></i> Booking Details</h2>
             <div id="booking-details-content">
                 <!-- Booking details will be loaded here -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i> Loading booking details...
+                </div>
             </div>
             <div class="form-actions booking-actions">
-                <button class="btn btn-secondary" id="cancel-booking-btn">Cancel Booking</button>
-                <button class="btn btn-primary" id="confirm-booking-btn">Confirm Booking</button>
-                <button class="btn btn-primary" id="complete-booking-btn">Mark as Completed</button>
+                <button class="btn btn-secondary" id="cancel-booking-btn"><i class="fas fa-ban"></i> Cancel Booking</button>
+                <button class="btn btn-primary" id="confirm-booking-btn"><i class="fas fa-check-circle"></i> Confirm Booking</button>
+                <button class="btn btn-primary" id="complete-booking-btn"><i class="fas fa-flag-checkered"></i> Mark as Completed</button>
             </div>
         </div>
     </div>
@@ -378,11 +410,11 @@
     <div class="modal" id="confirm-modal">
         <div class="modal-content small-modal">
             <span class="close-modal" id="close-confirm-modal">&times;</span>
-            <h2 id="confirm-title">Confirm Action</h2>
+            <h2 id="confirm-title"><i class="fas fa-exclamation-triangle"></i> Confirm Action</h2>
             <p id="confirm-message">Are you sure you want to proceed with this action?</p>
             <div class="form-actions">
-                <button class="btn btn-secondary" id="cancel-confirm-btn">Cancel</button>
-                <button class="btn btn-danger" id="proceed-confirm-btn">Proceed</button>
+                <button class="btn btn-secondary" id="cancel-confirm-btn"><i class="fas fa-times"></i> Cancel</button>
+                <button class="btn btn-danger" id="proceed-confirm-btn"><i class="fas fa-check"></i> Proceed</button>
             </div>
         </div>
     </div>
@@ -391,34 +423,77 @@
     <div class="modal" id="user-role-modal">
         <div class="modal-content small-modal">
             <span class="close-modal" id="close-user-role-modal">&times;</span>
-            <h2>Change User Role</h2>
+            <h2><i class="fas fa-user-cog"></i> Change User Role</h2>
             <form id="user-role-form">
                 <input type="hidden" id="edit-user-id">
                 <div class="form-group">
-                    <label>User Name</label>
+                    <label><i class="fas fa-user"></i> User Name</label>
                     <div id="role-user-name" class="form-static-text"></div>
                 </div>
                 <div class="form-group">
-                    <label>User Email</label>
+                    <label><i class="fas fa-envelope"></i> User Email</label>
                     <div id="role-user-email" class="form-static-text"></div>
                 </div>
                 <div class="form-group">
-                    <label>Role</label>
+                    <label><i class="fas fa-user-tag"></i> Role</label>
                     <select id="user-role" required>
                         <option value="user">Regular User</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancel-role-btn">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-role-btn"><i class="fas fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
     
-    <footer>
-        <p>&copy; 2025 VroomGo Admin. All rights reserved.</p>
+            <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>VroomGo</h3>
+                <p>Your trusted platform for vehicle rentals. We make it easy to find and book the perfect ride for any occasion.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="/dashboard.html">Dashboard</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Vehicle Types</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html?type=Car">Cars</a></li>
+                    <li><a href="../index.html?type=SUV">SUVs</a></li>
+                    <li><a href="../index.html?type=Bike">Motorcycles</a></li>
+                    <li><a href="../index.html?type=Luxury">Luxury Vehicles</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</p>
+                <p><i class="fas fa-phone-alt"></i>+91 1234567890</p>
+                <p><i class="fas fa-envelope"></i> info@vroomgo.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm, Sat: 10am-4pm</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 VroomGo. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
     </footer>
 
     <!-- Firebase SDK -->

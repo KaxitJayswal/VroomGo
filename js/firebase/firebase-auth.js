@@ -56,14 +56,20 @@ firebase.auth().onAuthStateChanged(user => {
 
 // Handle Login
 function handleLogin(email, password) {
+    // Define a fallback email validation if security.js hasn't loaded
+    const fallbackEmailValidation = (email) => {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    };
+    
     // Validate email
-    if (!window.securityUtils?.validateEmail(email)) {
+    if (!(window.securityUtils?.validateEmail?.(email) ?? fallbackEmailValidation(email))) {
         alert('Please enter a valid email address');
         return Promise.reject(new Error('Invalid email format'));
     }
     
     // Sanitize inputs
-    email = window.securityUtils?.sanitizeInput(email) || email;
+    email = window.securityUtils?.sanitizeInput?.(email) || email;
     
     // Rate limiting - prevent brute force attacks
     const now = new Date().getTime();
@@ -99,22 +105,28 @@ function handleLogin(email, password) {
 
 // Handle Sign Up
 function handleSignUp(email, password, name) {
+    // Define fallback email validation if security.js hasn't loaded
+    const fallbackEmailValidation = (email) => {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    };
+    
     // Validate email
-    if (!window.securityUtils?.validateEmail(email)) {
+    if (!(window.securityUtils?.validateEmail?.(email) ?? fallbackEmailValidation(email))) {
         alert('Please enter a valid email address');
         return Promise.reject(new Error('Invalid email format'));
     }
     
-    // Validate password
-    const passwordFeedback = window.securityUtils?.getPasswordFeedback(password);
+    // Validate password - with fallback
+    const passwordFeedback = window.securityUtils?.getPasswordFeedback?.(password);
     if (passwordFeedback && !passwordFeedback.valid) {
         alert(passwordFeedback.message);
         return Promise.reject(new Error(passwordFeedback.message));
     }
     
     // Sanitize inputs
-    email = window.securityUtils?.sanitizeInput(email) || email;
-    name = window.securityUtils?.sanitizeInput(name) || name;
+    email = window.securityUtils?.sanitizeInput?.(email) || email;
+    name = window.securityUtils?.sanitizeInput?.(name) || name;
     
     return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {

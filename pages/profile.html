@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -84,15 +85,20 @@
                         <form id="profile-form">
                             <div class="form-group">
                                 <label for="display-name">Display Name</label>
-                                <input type="text" id="display-name" value="">
+                                <input type="text" id="display-name" placeholder="Enter your name" value="">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" value="">
+                                <input type="tel" id="phone" placeholder="Enter your phone number" value="">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <textarea id="address" rows="3"></textarea>
+                                <textarea id="address" rows="3" placeholder="Enter your address"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="photo-url">Profile Photo URL</label>
+                                <input type="text" id="photo-url" placeholder="Enter URL for profile picture" value="">
+                                <small class="form-text">Enter a URL to your profile picture (e.g., https://example.com/image.jpg)</small>
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-secondary" id="cancel-profile">Cancel</button>
@@ -114,6 +120,7 @@
                             <div class="form-group">
                                 <label for="new-password">New Password</label>
                                 <input type="password" id="new-password" required>
+                                <small class="form-text">Password must be at least 6 characters long</small>
                             </div>
                             <div class="form-group">
                                 <label for="confirm-password">Confirm New Password</label>
@@ -124,6 +131,15 @@
                                 <button type="submit" class="btn btn-primary">Update Password</button>
                             </div>
                         </form>
+                    </div>
+                    
+                    <div class="profile-section danger-zone">
+                        <h2>Account Deletion</h2>
+                        <p class="warning-text">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Warning: Deleting your account is permanent and cannot be undone. All your data, including profile information, bookings, and activity history will be permanently removed.
+                        </p>
+                        <button id="delete-account-btn" class="btn btn-danger">Delete My Account</button>
                     </div>
                 </div>
                 
@@ -140,8 +156,51 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 VroomGo. All rights reserved.</p>
+            <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>VroomGo</h3>
+                <p>Your trusted platform for vehicle rentals. We make it easy to find and book the perfect ride for any occasion.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="/dashboard.html">Dashboard</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Vehicle Types</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html?type=Car">Cars</a></li>
+                    <li><a href="../index.html?type=SUV">SUVs</a></li>
+                    <li><a href="../index.html?type=Bike">Motorcycles</a></li>
+                    <li><a href="../index.html?type=Luxury">Luxury Vehicles</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</p>
+                <p><i class="fas fa-phone-alt"></i>+91 1234567890</p>
+                <p><i class="fas fa-envelope"></i> info@vroomgo.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm, Sat: 10am-4pm</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 VroomGo. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
     </footer>
 
     <!-- Firebase SDK -->
@@ -150,212 +209,11 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
     <!-- App Scripts -->
+    <script src="../js/utils/security.js"></script>
     <script src="../js/firebase/firebase-init.js"></script>
     <script src="../js/firebase/firebase-auth.js"></script>
     <script src="../js/utils/app.js"></script>
     <script src="../js/utils/navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tab switching functionality
-            const tabs = document.querySelectorAll('.profile-tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Remove active class from all tabs and contents
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    
-                    // Add active class to clicked tab and corresponding content
-                    this.classList.add('active');
-                    document.getElementById(tabId + '-tab').classList.add('active');
-                });
-            });
-            
-            // Load user profile data when authenticated
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // Update profile information
-                    document.getElementById('profile-name').textContent = user.displayName || 'User';
-                    document.getElementById('profile-email').textContent = user.email;
-                    document.getElementById('display-name').value = user.displayName || '';
-                    
-                    // Set profile avatar
-                    const profileAvatar = document.getElementById('profile-avatar');
-                    if (user.photoURL) {
-                        profileAvatar.innerHTML = `<img src="${user.photoURL}" alt="${user.displayName || 'User'}" />`;
-                    } else {
-                        const initials = user.displayName 
-                            ? user.displayName.split(' ').map(n => n[0]).join('').toUpperCase()
-                            : user.email[0].toUpperCase();
-                        profileAvatar.innerHTML = `<span>${initials}</span>`;
-                    }
-                    
-                    // Get additional user data from Firestore
-                    firebase.firestore().collection('users').doc(user.uid).get()
-                        .then((doc) => {
-                            if (doc.exists) {
-                                const userData = doc.data();
-                                if (userData.phone) document.getElementById('phone').value = userData.phone;
-                                if (userData.address) document.getElementById('address').value = userData.address;
-                                
-                                // Load activity data
-                                loadUserActivity(user.uid);
-                            }
-                        })
-                        .catch((error) => {
-                            console.error("Error getting user data:", error);
-                        });
-                } else {
-                    // Redirect to login page if not authenticated
-                    window.location.href = 'login.html';
-                }
-            });
-            
-            // Handle profile form submission
-            document.getElementById('profile-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const user = firebase.auth().currentUser;
-                if (user) {
-                    const displayName = document.getElementById('display-name').value;
-                    const phone = document.getElementById('phone').value;
-                    const address = document.getElementById('address').value;
-                    
-                    // Update display name in Auth
-                    user.updateProfile({
-                        displayName: displayName
-                    }).then(() => {
-                        // Update additional info in Firestore
-                        return firebase.firestore().collection('users').doc(user.uid).set({
-                            phone: phone,
-                            address: address
-                        }, { merge: true });
-                    }).then(() => {
-                        alert('Profile updated successfully!');
-                        // Update profile name display
-                        document.getElementById('profile-name').textContent = displayName || 'User';
-                    }).catch((error) => {
-                        console.error("Error updating profile:", error);
-                        alert('Error updating profile: ' + error.message);
-                    });
-                }
-            });
-            
-            // Handle password form submission
-            document.getElementById('password-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const currentPassword = document.getElementById('current-password').value;
-                const newPassword = document.getElementById('new-password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-                
-                if (newPassword !== confirmPassword) {
-                    alert('New password and confirmation do not match!');
-                    return;
-                }
-                
-                const user = firebase.auth().currentUser;
-                if (user) {
-                    // Re-authenticate user with current password
-                    const credential = firebase.auth.EmailAuthProvider.credential(
-                        user.email, 
-                        currentPassword
-                    );
-                    
-                    user.reauthenticateWithCredential(credential).then(() => {
-                        // User re-authenticated, now update password
-                        return user.updatePassword(newPassword);
-                    }).then(() => {
-                        alert('Password updated successfully!');
-                        document.getElementById('password-form').reset();
-                    }).catch((error) => {
-                        console.error("Error updating password:", error);
-                        alert('Error updating password: ' + error.message);
-                    });
-                }
-            });
-            
-            // Load user activity
-            function loadUserActivity(userId) {
-                const activityList = document.getElementById('activity-list');
-                activityList.innerHTML = '';
-                
-                firebase.firestore().collection('user_activity')
-                    .where('userId', '==', userId)
-                    .orderBy('timestamp', 'desc')
-                    .limit(10)
-                    .get()
-                    .then((querySnapshot) => {
-                        if (querySnapshot.empty) {
-                            activityList.innerHTML = '<p>No recent activity.</p>';
-                            return;
-                        }
-                        
-                        querySnapshot.forEach((doc) => {
-                            const activity = doc.data();
-                            const date = activity.timestamp.toDate();
-                            const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-                            
-                            let iconClass = 'fas fa-info-circle';
-                            switch(activity.type) {
-                                case 'booking':
-                                    iconClass = 'fas fa-car';
-                                    break;
-                                case 'login':
-                                    iconClass = 'fas fa-sign-in-alt';
-                                    break;
-                                case 'profile_update':
-                                    iconClass = 'fas fa-user-edit';
-                                    break;
-                            }
-                            
-                            const activityItem = `
-                                <div class="activity-item">
-                                    <div class="activity-icon">
-                                        <i class="${iconClass}"></i>
-                                    </div>
-                                    <div class="activity-content">
-                                        <h3>${activity.title}</h3>
-                                        <p>${activity.description}</p>
-                                    </div>
-                                    <div class="activity-date">${formattedDate}</div>
-                                </div>
-                            `;
-                            
-                            activityList.innerHTML += activityItem;
-                        });
-                    })
-                    .catch((error) => {
-                        console.error("Error getting user activity:", error);
-                        activityList.innerHTML = '<p>Error loading activity data.</p>';
-                    });
-            }
-            
-            // Cancel buttons functionality
-            document.getElementById('cancel-profile').addEventListener('click', function() {
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        document.getElementById('display-name').value = user.displayName || '';
-                        
-                        firebase.firestore().collection('users').doc(user.uid).get()
-                            .then((doc) => {
-                                if (doc.exists) {
-                                    const userData = doc.data();
-                                    if (userData.phone) document.getElementById('phone').value = userData.phone;
-                                    if (userData.address) document.getElementById('address').value = userData.address;
-                                }
-                            });
-                    }
-                });
-            });
-            
-            document.getElementById('cancel-password').addEventListener('click', function() {
-                document.getElementById('password-form').reset();
-            });
-        });
-    </script>
+    <script src="../js/pages/profile.js"></script>
 </body>
 </html>

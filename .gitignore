@@ -22,6 +22,22 @@ node_modules/
 Thumbs.db
 desktop.ini
 
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*~
+
+# VS Code specific files that should not be tracked
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+.history/
+*.vsix
+.DS_Store
+Thumbs.db
+desktop.ini
+
 # Debug logs
 npm-debug.log*
 yarn-debug.log*

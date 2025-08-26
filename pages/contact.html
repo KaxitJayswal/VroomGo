@@ -6,8 +6,10 @@
     <title>VroomGo - Contact Us</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/contact.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
     <nav class="navbar">
@@ -71,7 +73,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h3>Address</h3>
-                                <p>123 Main Street, Anytown, USA 12345</p>
+                                <p>Ahemdabad,Gujarat</p>
                             </div>
                         </div>
                         
@@ -79,7 +81,7 @@
                             <i class="fas fa-phone-alt"></i>
                             <div>
                                 <h3>Phone</h3>
-                                <p>+1 (555) 123-4567</p>
+                                <p>+91 12345 67890</p>
                             </div>
                         </div>
                         
@@ -140,21 +142,54 @@
                     </form>
                 </div>
             </div>
-            
-            <div class="map-container">
-                <h2>Find Us</h2>
-                <div class="map-placeholder">
-                    <!-- In a real implementation, this would be replaced with an actual map integration -->
-                    <div style="background-color: #f0f0f0; height: 400px; display: flex; align-items: center; justify-content: center;">
-                        <p>Google Maps Integration Would Appear Here</p>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 VroomGo. All rights reserved.</p>
+            <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>VroomGo</h3>
+                <p>Your trusted platform for vehicle rentals. We make it easy to find and book the perfect ride for any occasion.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="/dashboard.html">Dashboard</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Vehicle Types</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html?type=Car">Cars</a></li>
+                    <li><a href="../index.html?type=SUV">SUVs</a></li>
+                    <li><a href="../index.html?type=Bike">Motorcycles</a></li>
+                    <li><a href="../index.html?type=Luxury">Luxury Vehicles</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</p>
+                <p><i class="fas fa-phone-alt"></i>+91 1234567890</p>
+                <p><i class="fas fa-envelope"></i> info@vroomgo.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm, Sat: 10am-4pm</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 VroomGo. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
     </footer>
 
     <!-- Firebase SDK -->
@@ -163,9 +198,11 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
     <!-- App Scripts -->
+    <script src="../js/utils/security.js"></script>
     <script src="../js/firebase/firebase-init.js"></script>
     <script src="../js/firebase/firebase-auth.js"></script>
     <script src="../js/utils/app.js"></script>
     <script src="../js/utils/navbar.js"></script>
+    <script src="../js/pages/contact.js"></script>
 </body>
 </html>

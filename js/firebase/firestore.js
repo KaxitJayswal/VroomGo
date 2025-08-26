@@ -118,7 +118,7 @@ function createVehicleCard(vehicle) {
     const card = document.createElement('div');
     card.className = 'vehicle-card';
     card.innerHTML = `
-        <a href="vehicle-detail.html?id=${vehicle.id}" class="vehicle-card-link">
+        <a href="pages/vehicle-detail.html?id=${vehicle.id}" class="vehicle-card-link">
             <div class="vehicle-image">
                 <img src="${vehicle.imageUrl}" alt="${vehicle.vehicleName}">
             </div>

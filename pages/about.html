@@ -6,6 +6,8 @@
     <title>VroomGo - About Us</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/about.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -71,12 +73,16 @@
                     <h2>Our Mission</h2>
                     <p>At VroomGo, we believe that everyone deserves access to reliable transportation. Our mission is to provide high-quality vehicles at competitive prices, with exceptional customer service every step of the way.</p>
                     
+                    <h2>Our Vision</h2>
+                    <p>To become the most trusted and preferred vehicle rental service by delivering exceptional customer experiences, sustainable transportation solutions, and innovative mobility options for all.</p>
+                    
                     <h2>Our Values</h2>
                     <ul>
                         <li><strong>Customer First:</strong> We put our customers at the center of everything we do.</li>
                         <li><strong>Quality:</strong> We maintain our vehicles to the highest standards.</li>
                         <li><strong>Transparency:</strong> No hidden fees or charges - what you see is what you pay.</li>
                         <li><strong>Sustainability:</strong> We're committed to reducing our environmental impact.</li>
+                        <li><strong>Innovation:</strong> We constantly seek new ways to improve our services.</li>
                     </ul>
                 </div>
             </div>
@@ -110,8 +116,51 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 VroomGo. All rights reserved.</p>
+            <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>VroomGo</h3>
+                <p>Your trusted platform for vehicle rentals. We make it easy to find and book the perfect ride for any occasion.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="/dashboard.html">Dashboard</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Vehicle Types</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html?type=Car">Cars</a></li>
+                    <li><a href="../index.html?type=SUV">SUVs</a></li>
+                    <li><a href="../index.html?type=Bike">Motorcycles</a></li>
+                    <li><a href="../index.html?type=Luxury">Luxury Vehicles</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</p>
+                <p><i class="fas fa-phone-alt"></i>+91 1234567890</p>
+                <p><i class="fas fa-envelope"></i> info@vroomgo.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm, Sat: 10am-4pm</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 VroomGo. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
     </footer>
 
     <!-- Firebase SDK -->
@@ -120,6 +169,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
     <!-- App Scripts -->
+    <script src="../js/utils/security.js"></script>
     <script src="../js/firebase/firebase-init.js"></script>
     <script src="../js/firebase/firebase-auth.js"></script>
     <script src="../js/utils/app.js"></script>

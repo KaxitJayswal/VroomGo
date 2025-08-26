@@ -19,6 +19,29 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// Initialize security utils if not already defined
+if (!window.securityUtils) {
+    console.warn('Security utilities not loaded. Using fallback security methods.');
+    window.securityUtils = {
+        validateEmail: (email) => {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(String(email).toLowerCase());
+        },
+        sanitizeInput: (input) => {
+            if (typeof input !== 'string') return input;
+            const temp = document.createElement('div');
+            temp.textContent = input;
+            return temp.innerHTML;
+        },
+        getPasswordFeedback: (password) => {
+            if (password && password.length >= 6) {
+                return { valid: true };
+            }
+            return { valid: false, message: 'Password must be at least 6 characters long' };
+        }
+    };
+}
+
 // Disable console logs in production
 if (window.location.hostname !== "localhost" && 
     window.location.hostname !== "127.0.0.1") {
