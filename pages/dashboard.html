@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VroomGo - Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1>VroomGo</h1>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="dashboard.html" class="auth-required active">Dashboard</a>
+            <a href="admin.html" class="admin-only">Admin</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="login.html" class="btn btn-login logged-out-only">Login</a>
+        </div>
+        <div class="user-profile logged-in-only" style="display: none;">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <span class="user-name">User</span>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            <div class="dropdown-menu">
+                <a href="profile.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    My Profile
+                </a>
+                <a href="dashboard.html" class="dropdown-item auth-required active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="admin.html" class="dropdown-item admin-only">
+                    <i class="fas fa-cogs"></i>
+                    Admin Panel
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main>
+        <section class="dashboard-header">
+            <h2>Welcome, <span id="user-name">User</span>!</h2>
+            <p>Manage your bookings and view your rental history</p>
+        </section>
+
+        <section class="stats-container">
+            <div class="stat-box">
+                <i class="fas fa-car-side"></i>
+                <h3>Total Bookings</h3>
+                <p id="total-bookings">0</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Upcoming Bookings</h3>
+                <p id="upcoming-bookings">0</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-check-circle"></i>
+                <h3>Completed Bookings</h3>
+                <p id="completed-bookings">0</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-times-circle"></i>
+                <h3>Canceled Bookings</h3>
+                <p id="canceled-bookings">0</p>
+            </div>
+        </section>
+
+        <section class="booking-history">
+            <h2>Booking History</h2>
+            <div class="filter-buttons">
+                <button class="btn filter-btn active" data-filter="all">All</button>
+                <button class="btn filter-btn" data-filter="upcoming">Upcoming</button>
+                <button class="btn filter-btn" data-filter="completed">Completed</button>
+                <button class="btn filter-btn" data-filter="past">Past</button>
+            </div>
+            <div id="booking-history-list" class="booking-list">
+                <!-- Booking items will be loaded here -->
+                <p class="no-bookings-msg">No bookings found.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 VroomGo. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../js/utils/security.js"></script>
+    <script src="../js/firebase/firebase-init.js"></script>
+    <script src="../js/firebase/firebase-auth.js"></script>
+    <script src="../js/firebase/firestore.js"></script>
+    <script src="../js/utils/app.js"></script>
+    <script src="../js/utils/diagnostics.js"></script>
+    <script src="../js/pages/dashboard-fix.js"></script>
+    <script src="../js/utils/navbar.js"></script>
+</body>
+</html>

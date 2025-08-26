@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VroomGo - About Us</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1>VroomGo</h1>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="dashboard.html" class="auth-required">Dashboard</a>
+            <a href="admin.html" class="admin-only">Admin</a>
+            <a href="about.html" class="active">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="login.html" class="btn btn-login logged-out-only">Login</a>
+        </div>
+        <div class="user-profile logged-in-only" style="display: none;">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <span class="user-name">User</span>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            <div class="dropdown-menu">
+                <a href="profile.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    My Profile
+                </a>
+                <a href="dashboard.html" class="dropdown-item auth-required">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="admin.html" class="dropdown-item admin-only">
+                    <i class="fas fa-cogs"></i>
+                    Admin Panel
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="about-section">
+            <h1>About VroomGo</h1>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="../images/about-us.jpg" alt="VroomGo Team" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22600%22 height%3D%22400%22%3E%3Crect width%3D%22600%22 height%3D%22400%22 fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Ctext x%3D%22300%22 y%3D%22200%22 font-size%3D%2220%22 text-anchor%3D%22middle%22 alignment-baseline%3D%22middle%22 fill%3D%22%23333333%22%3EAbout Us Image%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                </div>
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>VroomGo was founded in 2023 with a simple mission: to make car rentals easy, affordable, and accessible to everyone. What started as a small fleet of 5 cars has now grown into a nationwide service with thousands of satisfied customers.</p>
+                    
+                    <h2>Our Mission</h2>
+                    <p>At VroomGo, we believe that everyone deserves access to reliable transportation. Our mission is to provide high-quality vehicles at competitive prices, with exceptional customer service every step of the way.</p>
+                    
+                    <h2>Our Values</h2>
+                    <ul>
+                        <li><strong>Customer First:</strong> We put our customers at the center of everything we do.</li>
+                        <li><strong>Quality:</strong> We maintain our vehicles to the highest standards.</li>
+                        <li><strong>Transparency:</strong> No hidden fees or charges - what you see is what you pay.</li>
+                        <li><strong>Sustainability:</strong> We're committed to reducing our environmental impact.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="team-section">
+                <h2>Meet Our Team</h2>
+                <div class="team-members">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="../images/team1.jpg" alt="Team Member" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22200%22 height%3D%22200%22%3E%3Crect width%3D%22200%22 height%3D%22200%22 fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Ctext x%3D%22100%22 y%3D%22100%22 font-size%3D%2220%22 text-anchor%3D%22middle%22 alignment-baseline%3D%22middle%22 fill%3D%22%23333333%22%3ETeam Member%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        </div>
+                        <h3>John Smith</h3>
+                        <p>CEO & Founder</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="../images/team2.jpg" alt="Team Member" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22200%22 height%3D%22200%22%3E%3Crect width%3D%22200%22 height%3D%22200%22 fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Ctext x%3D%22100%22 y%3D%22100%22 font-size%3D%2220%22 text-anchor%3D%22middle%22 alignment-baseline%3D%22middle%22 fill%3D%22%23333333%22%3ETeam Member%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        </div>
+                        <h3>Sarah Johnson</h3>
+                        <p>Operations Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="../images/team3.jpg" alt="Team Member" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22200%22 height%3D%22200%22%3E%3Crect width%3D%22200%22 height%3D%22200%22 fill%3D%22%23cccccc%22%3E%3C%2Frect%3E%3Ctext x%3D%22100%22 y%3D%22100%22 font-size%3D%2220%22 text-anchor%3D%22middle%22 alignment-baseline%3D%22middle%22 fill%3D%22%23333333%22%3ETeam Member%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                        </div>
+                        <h3>Michael Rodriguez</h3>
+                        <p>Fleet Manager</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 VroomGo. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../js/firebase/firebase-init.js"></script>
+    <script src="../js/firebase/firebase-auth.js"></script>
+    <script src="../js/utils/app.js"></script>
+    <script src="../js/utils/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VroomGo - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-admin.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1>VroomGo Admin</h1>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="dashboard.html" class="auth-required">Dashboard</a>
+            <a href="admin.html" class="admin-only active">Admin</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="user-profile logged-in-only">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <span class="user-name">Admin</span>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            <div class="dropdown-menu">
+                <a href="profile.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i>
+                    My Profile
+                </a>
+                <a href="dashboard.html" class="dropdown-item auth-required">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="admin.html" class="dropdown-item admin-only active">
+                    <i class="fas fa-cogs"></i>
+                    Admin Panel
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Admin login section (shown when not logged in) -->
+        <div id="admin-login-container" class="admin-login-container">
+            <div class="admin-login-box">
+                <h2>Admin Login</h2>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-email">Email</label>
+                        <input type="email" id="admin-login-email" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-login-password" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div id="admin-login-error" class="error-message hidden"></div>
+            </div>
+        </div>
+
+        <!-- Admin dashboard (shown when logged in as admin) -->
+        <div id="admin-dashboard" class="admin-dashboard admin-only hidden">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li><button class="admin-menu-item active" data-section="vehicles">Vehicles</button></li>
+                    <li><button class="admin-menu-item" data-section="bookings">Bookings</button></li>
+                    <li><button class="admin-menu-item" data-section="users">Users</button></li>
+                    <li><button class="admin-menu-item" data-section="reports">Reports</button></li>
+                </ul>
+            </div>
+            
+            <div class="admin-content">
+                <!-- Vehicles Section -->
+                <section id="vehicles-section" class="admin-section active">
+                    <div class="section-header">
+                        <h2>Manage Vehicles</h2>
+                        <button id="add-vehicle-btn" class="btn btn-primary">Add New Vehicle</button>
+                    </div>
+                    
+                    <div class="search-filter">
+                        <input type="text" id="vehicle-search" placeholder="Search vehicles...">
+                        <select id="vehicle-filter">
+                            <option value="all">All Types</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="truck">Truck</option>
+                            <option value="van">Van</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table" id="vehicles-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Price/Day</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehicles-table-body">
+                                <!-- Vehicle data will be loaded here -->
+                                <tr class="loading-row">
+                                    <td colspan="6">Loading vehicles...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Bookings Section -->
+                <section id="bookings-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Manage Bookings</h2>
+                    </div>
+                    
+                    <div class="search-filter">
+                        <input type="text" id="booking-search" placeholder="Search bookings...">
+                        <select id="booking-filter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table" id="bookings-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>User</th>
+                                    <th>Vehicle</th>
+                                    <th>Dates</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-table-body">
+                                <!-- Booking data will be loaded here -->
+                                <tr class="loading-row">
+                                    <td colspan="7">Loading bookings...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Users Section -->
+                <section id="users-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Manage Users</h2>
+                    </div>
+                    
+                    <div class="search-filter">
+                        <input type="text" id="user-search" placeholder="Search users...">
+                        <select id="user-role-filter">
+                            <option value="all">All Roles</option>
+                            <option value="user">Regular Users</option>
+                            <option value="admin">Admins</option>
+                        </select>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Joined</th>
+                                    <th>Role</th>
+                                    <th>Bookings</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- User data will be loaded here -->
+                                <tr class="loading-row">
+                                    <td colspan="6">Loading users...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Reports Section -->
+                <section id="reports-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>Reports</h2>
+                    </div>
+                    
+                    <div class="report-cards">
+                        <div class="report-card">
+                            <h3>Total Revenue</h3>
+                            <div class="report-value" id="total-revenue">$0</div>
+                        </div>
+                        <div class="report-card">
+                            <h3>Active Bookings</h3>
+                            <div class="report-value" id="active-bookings">0</div>
+                        </div>
+                        <div class="report-card">
+                            <h3>Available Vehicles</h3>
+                            <div class="report-value" id="available-vehicles">0</div>
+                        </div>
+                        <div class="report-card">
+                            <h3>Total Users</h3>
+                            <div class="report-value" id="total-users">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-charts">
+                        <div class="report-chart">
+                            <h3>Bookings by Month</h3>
+                            <div id="bookings-chart" class="chart-container">
+                                <!-- Chart will be rendered here -->
+                                <p class="placeholder-text">Loading chart data...</p>
+                            </div>
+                        </div>
+                        <div class="report-chart">
+                            <h3>Popular Vehicles</h3>
+                            <div id="vehicles-chart" class="chart-container">
+                                <!-- Chart will be rendered here -->
+                                <p class="placeholder-text">Loading chart data...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Vehicle Modal -->
+    <div class="modal" id="vehicle-modal">
+        <div class="modal-content large-modal">
+            <span class="close-modal" id="close-vehicle-modal">&times;</span>
+            <h2 id="vehicle-modal-title">Add New Vehicle</h2>
+            <form id="vehicle-form">
+                <input type="hidden" id="edit-vehicle-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-name">Vehicle Name</label>
+                        <input type="text" id="vehicle-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-type">Type</label>
+                        <select id="vehicle-type" required>
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="truck">Truck</option>
+                            <option value="van">Van</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-price">Price Per Day ($)</label>
+                        <input type="number" id="vehicle-price" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-seats">Seats</label>
+                        <input type="number" id="vehicle-seats" min="1" max="20" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-transmission">Transmission</label>
+                        <select id="vehicle-transmission" required>
+                            <option value="automatic">Automatic</option>
+                            <option value="manual">Manual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-fuel">Fuel Type</label>
+                        <select id="vehicle-fuel" required>
+                            <option value="gasoline">Gasoline</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electric">Electric</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-luggage">Luggage Capacity</label>
+                        <input type="number" id="vehicle-luggage" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-mileage">Mileage Limit</label>
+                        <input type="text" id="vehicle-mileage" placeholder="e.g., Unlimited or 200 miles/day">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vehicle-image">Image URL</label>
+                    <input type="text" id="vehicle-image" required>
+                    <div class="image-preview-container">
+                        <img id="image-preview" src="" alt="Vehicle Preview" crossorigin="anonymous">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vehicle-description">Description</label>
+                    <textarea id="vehicle-description" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Features (comma separated)</label>
+                    <input type="text" id="vehicle-features" placeholder="e.g., GPS, Bluetooth, Backup Camera">
+                </div>
+                
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="vehicle-status" value="available" checked> Available
+                        </label>
+                        <label>
+                            <input type="radio" name="vehicle-status" value="maintenance"> Maintenance
+                        </label>
+                        <label>
+                            <input type="radio" name="vehicle-status" value="inactive"> Inactive
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-vehicle-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Vehicle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Booking Details Modal -->
+    <div class="modal" id="booking-details-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-booking-details">&times;</span>
+            <h2>Booking Details</h2>
+            <div id="booking-details-content">
+                <!-- Booking details will be loaded here -->
+            </div>
+            <div class="form-actions booking-actions">
+                <button class="btn btn-secondary" id="cancel-booking-btn">Cancel Booking</button>
+                <button class="btn btn-primary" id="confirm-booking-btn">Confirm Booking</button>
+                <button class="btn btn-primary" id="complete-booking-btn">Mark as Completed</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content small-modal">
+            <span class="close-modal" id="close-confirm-modal">&times;</span>
+            <h2 id="confirm-title">Confirm Action</h2>
+            <p id="confirm-message">Are you sure you want to proceed with this action?</p>
+            <div class="form-actions">
+                <button class="btn btn-secondary" id="cancel-confirm-btn">Cancel</button>
+                <button class="btn btn-danger" id="proceed-confirm-btn">Proceed</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Role Modal -->
+    <div class="modal" id="user-role-modal">
+        <div class="modal-content small-modal">
+            <span class="close-modal" id="close-user-role-modal">&times;</span>
+            <h2>Change User Role</h2>
+            <form id="user-role-form">
+                <input type="hidden" id="edit-user-id">
+                <div class="form-group">
+                    <label>User Name</label>
+                    <div id="role-user-name" class="form-static-text"></div>
+                </div>
+                <div class="form-group">
+                    <label>User Email</label>
+                    <div id="role-user-email" class="form-static-text"></div>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="user-role" required>
+                        <option value="user">Regular User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-role-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 VroomGo Admin. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    
+    <!-- Charts.js for reports -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../js/firebase/firebase-init.js"></script>
+    <script src="../js/firebase/firebase-auth.js"></script>
+    <script src="../js/firebase/firestore.js"></script>
+    <script src="../js/utils/image-fallback.js"></script>
+    <script src="../js/utils/admin-utils.js"></script>
+    <script src="../js/utils/admin-tools.js"></script>
+    <script src="../js/pages/admin.js"></script>
+    <script src="../js/utils/navbar.js"></script>
+</body>
+</html>
